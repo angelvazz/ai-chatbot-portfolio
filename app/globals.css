@@ -1,26 +1,47 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:is(.dark *));
+
+.ai-bubble::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: 0;
+  left: -7px;
+  border-bottom: 12px solid theme("colors.slate.800");
+  border-left: 12px solid transparent;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.user-bubble::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: 0;
+  right: -6px;
+  border-bottom: 12px solid theme("colors.blue.500");
+  border-right: 12px solid transparent;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.iridescent-border {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, #38bdf8, #ec4899, #8b5cf6, #38bdf8);
+  background-size: 200% 100%;
+  animation: iridescent-glow 4s linear infinite;
+}
+
+@keyframes iridescent-glow {
+  0% {
+    background-position: 200% 0;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  100% {
+    background-position: -200% 0;
+  }
 }
