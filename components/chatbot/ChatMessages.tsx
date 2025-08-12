@@ -9,11 +9,20 @@ export function ChatMessages() {
   const activeChat = chats.find((chat) => chat.id === activeChatId);
   const messages = activeChat?.messages || [];
   const isLoading = useChatStore((state) => state.isLoading);
+  const isMessagesLoading = useChatStore((state) => state.isMessagesLoading);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isLoading]);
+
+  if (isMessagesLoading) {
+    return (
+      <div className="flex-1 flex items-center justify-center">
+        <p className="text-muted-foreground">Loading chat history...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex-1 overflow-y-auto p-6 space-y-6">

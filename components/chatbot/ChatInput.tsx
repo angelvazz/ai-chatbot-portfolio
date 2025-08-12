@@ -23,7 +23,6 @@ export function ChatInput() {
     const file = event.target.files?.[0];
     if (file && activeChatId) {
       actions.attachDocument(activeChatId, file.name);
-      // Here you would upload the file and process it on the backend
     }
   };
 
